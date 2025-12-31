@@ -18,5 +18,5 @@ Follow these steps to setup the project on your computer:
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/imrohit078/SmartCropCare.git](https://github.com/YOUR-USERNAME/SmartCropCare.git)
+git clone https://github.com/imrohit078/SmartCropCare.git
 cd SmartCropCare
