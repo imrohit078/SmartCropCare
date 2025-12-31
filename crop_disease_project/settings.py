@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xp9d+4lobg7fxy6bah*k@#1fl+er-m%rdqescyv0k)3b-&nhj4'
+SECRET_KEY = 'ENTER YOUR SECRET KEY HERE'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,8 +79,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'crop_app',
-        'USER': 'root',
-        'PASSWORD': 'mahakal123',
+        'USER': 'USER NAME',
+        'PASSWORD': 'PASSWORD',
         'HOST': 'localhost',
     }
 }
