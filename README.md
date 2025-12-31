@@ -10,7 +10,7 @@ The AI model is trained on the **New Plant Diseases Dataset**.
 - **Backend:** Django (Python)
 - **Frontend:** HTML, CSS, JavaScript, Bootstrap
 - **AI/ML:** TensorFlow / Keras (CNN Model)
-- **Database:** SQLite (Default)
+- **Database:** MySQL
 
 ## 🚀 How to Run Locally
 
