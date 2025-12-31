@@ -1,0 +1,15 @@
+# Django ignore rules
+*.sqlite3
+__pycache__/
+*.pyc
+media/
+staticfiles/
+.env
+*.log
+.DS_Store
+*.h5
+*.pkl
+*.pt
+db.sqlite3
+migrations/
+*.egg-info/

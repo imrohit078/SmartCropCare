@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Disease Prediction Result</title>
+</head>
+<body>
+    <h1>Disease Prediction Result</h1>
+    {% if image_url %}
+        <img src="{{ image_url }}" alt="Uploaded Image" style="max-width: 300px;"><br><br>
+        <h2>Disease: {{ label }}</h2>
+        <p><strong>Confidence:</strong> {{ confidence }}%</p>
+        <h3>Prevention Steps:</h3>
+        <ul>
+            {% for step in precautions %}
+                <li>{{ step }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="image" required><br><br>
+            <button type="submit">Predict Disease</button>
+        </form>
+    {% endif %}
+</body>
+</html>

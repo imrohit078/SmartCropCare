@@ -1,0 +1,52 @@
+{% include "base.html" %}
+
+
+<section class="py-5 bg-light d-flex align-items-center" style="min-height: 60vh;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 col-md-9 col-12">
+        <div class="card shadow rounded-4 border-0">
+          <div class="card-body p-5">
+            <h2 class="text-center text-success mb-2">Contact Us</h2>
+            <p class="text-center text-muted mb-4">
+              We'd love to hear from you! Whether you're a farmer or enthusiast — help us grow together.
+            </p>
+
+            {% if submitted %}
+              <div class="alert alert-success text-center">
+                ✅ Thanks for contacting us! We'll get back to you soon.
+              </div>
+            {% endif %}
+
+            <form method="POST" novalidate>
+              {% csrf_token %}
+              <div class="row g-3">
+                <div class="col-md-6">
+                  {{ form.name.label_tag }}
+                  {{ form.name }}
+                </div>
+                <div class="col-md-6">
+                  {{ form.email.label_tag }}
+                  {{ form.email }}
+                </div>
+                <div class="col-12">
+                  {{ form.message.label_tag }}
+                  {{ form.message }}
+                </div>
+              </div>
+              <button type="submit" class="btn btn-success w-100 mt-4 py-2">Send Message</button>
+            </form>
+
+            <div class="text-center mt-4">
+              <a href="{% url 'faq' %}" class="btn btn-outline-success btn-sm">
+                Browse Frequently Asked Questions ❓ 
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "footer.html" %}

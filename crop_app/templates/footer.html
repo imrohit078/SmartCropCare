@@ -1,0 +1,31 @@
+<footer style="background-color: #111827; color: white; padding: 40px 0; margin-top: 50px;">
+    <div style="max-width: 1100px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; padding: 0 20px; ">
+      <div style="flex: 1 1 250px; margin-bottom: 20px;display: flex; flex-direction: column; align-items: center;">
+        <h3 style="margin-bottom: 15px; color: #10b981;">🌱SmartCropCare🌾</h3>
+        <p style="color: #d1d5db;">An AI-powered platform for plant disease detection and prevention. Empowering agriculture with technology.</p>
+      </div>
+      
+      <div style="flex: 1 1 150px; margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
+        <h4 style="margin-bottom: 10px;">Quick Links</h4>
+        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; align-items: center;">
+          <li><a href="{% url 'home' %}" style="color: #9ca3af; text-decoration: none;">Home</a></li>
+          <li><a href="{% url 'blog_list' %}" style="color: #9ca3af; text-decoration: none;">Blogs</a></li>
+          <li><a href="{% url 'about' %}" style="color: #9ca3af; text-decoration: none;">About</a></li>
+          <li><a href="{% url 'detect_disease' %}" style="color: #9ca3af; text-decoration: none;">Detect Disease</a></li>
+          <li><a href="{% url 'contact' %}" style="color: #9ca3af; text-decoration: none;">Contact</a></li>
+        </ul>
+      </div>
+  
+      <div style="flex: 1 1 200px; margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
+        <h4 style="margin-bottom: 10px;">Contact</h4>
+        <p style="color: #d1d5db;">Email: support@smartcropcare.com</p>
+        <p style="color: #d1d5db;">Phone: +91-9876543210</p>
+        <p style="color: #d1d5db;">Location: India</p>
+      </div>
+    </div>
+  
+    <div style="text-align: center; padding-top: 20px; border-top: 1px solid #374151; color: #9ca3af;">
+      &copy; {{ year|default:2025 }} SmartCropCare. All rights reserved.
+    </div>
+  </footer>
+  

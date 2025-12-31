@@ -1,0 +1,55 @@
+{% include "base.html" %}
+
+
+<div class="about" style="width: 100%; display: flex; justify-content: center;">
+    <div class="containe" style="width: 80%;">
+        <h1>About Our Platform</h1>
+
+        <div class="section">
+            <p>Welcome to the  <span>🌱SmartCropCare🌾</span><i> AI-powered <strong>Crop Disease Detection and Prevention System</strong></i>, a smart solution to assist farmers, gardeners, and researchers in identifying plant diseases early and accurately.</p>
+        </div>
+
+        <div class="section">
+            <h2>What We Do</h2>
+            <p>Our platform uses deep learning models trained on the <strong>New Plant Disease Dataset</strong> from Kaggle to analyze plant leaf images and detect diseases with high accuracy. Once detected, it provides easy-to-follow prevention steps to control and manage the disease.</p>
+        </div>
+
+        <div class="section">
+            <h2>How It Works</h2>
+            <ul>
+                <li>You upload a clear image of the affected plant leaf.</li>
+                <li>Our AI model processes the image and predicts the disease based on visual patterns.</li>
+                <li>We show you the name of the disease, detailed description, and step-by-step prevention tips.</li>
+                <li>We also display reference images to help you visually verify the diagnosis.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Why This Matters</h2>
+            <div class="highlight">
+                Agriculture feeds the world. Our goal is to empower farmers with modern technology to protect their crops, improve yields, and reduce chemical usage by enabling early intervention.
+            </div>
+            <p>This system helps:</p>
+            <ul>
+                <li>Farmers to make timely decisions and avoid crop loss</li>
+                <li>Gardeners to keep their plants healthy</li>
+                <li>Students and researchers to explore practical AI applications in agriculture</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Community Engagement</h2>
+            <p>We also provide a <strong>blog system</strong> where users can post agricultural tips, disease treatment methods, or success stories. Posts are reviewed by our admin for quality assurance. You can also comment and react to other blogs.</p>
+        </div>
+
+        <div class="section">
+            <h2>Contact Us</h2>
+            <p>Have feedback, questions, or suggestions? Reach out to us via the <a href="{% url 'contact' %}">Contact Page</a>. We’d love to hear from you!</p>
+        </div>
+    </div>
+
+</div>
+    {% include "footer.html" %}
+
+</body>
+</html>

@@ -1,0 +1,414 @@
+{% include "base.html" %}
+{% load static %}
+
+<!-- Hero Section with Weather -->
+<div class="hero-section" style="position: relative; margin-top: .5rem; height: 95vh; width: 100%; background: url('{% static 'images/bg-home.jpg' %}') no-repeat center center/cover; display: flex; align-items: center; justify-content: center; text-align: center; color: white;">
+
+  <!-- Weather Box -->
+  <div id="weather-box" style="
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.16);
+      padding: 12px 16px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.3);
+      z-index: 10;
+      width: 250px;
+      font-family: 'Segoe UI', sans-serif;
+  ">
+    <strong>🌤️ Weather Update</strong>
+    <p id="location" style="margin: 4px 0;"></p>
+    <p id="temperature" style="margin: 4px 0;"></p>
+    <p id="description" style="margin: 4px 0;"></p>
+    <div id="crop-suggestions" style="font-size: 0.85rem; margin-top: 8px;"></div>
+    <a href="{% url 'get_weather' %}" class="btn btn-sm btn-light mt-2">More Forecast</a>
+  </div>
+
+  <!-- Hero Text -->
+  <div class="content">
+    <h1 style="font-size: 3rem; font-weight: bold;">🌱SmartCropCare🌾</h1>
+    <p style="font-size: 1.2rem; max-width: 600px; margin: 10px auto; text-shadow: 1px 1px 3px rgba(0,0,0,0.8)">Empowering farmers with intelligent tools to detect plant diseases early and take timely preventive actions.</p>
+    <a href="{% url 'detect_disease' %}" class="btn btn-success detect-btn mt-3">Detect Disease</a>
+  </div>
+</div>
+
+<!-- Farmer Review Section -->
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Happy Farmers, Healthy Fields 👨‍🌾</h2>
+  <div class="row justify-content-center text-center">
+
+    <div class="col-md-4 col-sm-6 mb-4">
+      <div class="card shadow border-0 h-100">
+        <img src="{% static 'images/image1.jpg' %}" class="card-img-top" alt="Farmer 1" style="height: 250px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">Ramesh Verma</h5>
+          <p class="card-text">"This tool helped me detect early blight in tomatoes and saved my whole crop. Thank you!"</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-6 mb-4">
+      <div class="card shadow border-0 h-100">
+        <img src="{% static 'images/image2.jpg' %}" class="card-img-top" alt="Farmer 2" style="height: 250px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">Meena Devi</h5>
+          <p class="card-text">"Now I can easily identify plant problems and get solutions in seconds. A blessing for small farmers!"</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-6 mb-4">
+      <div class="card shadow border-0 h-100">
+        <img src="{% static 'images/image3.jpg' %}" class="card-img-top" alt="Farmer 3" style="height: 250px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">Sukhdev Singh</h5>
+          <p class="card-text">"Very useful app for rural areas. Works even with low internet and gives accurate results!"</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<!--  -->
+
+<!-- Crop Disease Detection & Prevention Section -->
+<section class="py-5 bg-light" id="crop-disease-section">
+  <div class="container">
+    <div class="row justify-content-center text-center mb-4">
+      <div class="col-lg-8">
+        <h2 class="fw-bold text-success">🌱 SmartCropCare – AI for Smarter Farming 🌾</h2>
+        <p class="lead text-muted">
+          A one-stop platform for farmers to detect plant diseases, access prevention tips, get weather updates, and explore modern farming insights—all with the help of AI.
+        </p>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <!-- Upload Leaf Image -->
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <i class="bi bi-camera" style="font-size: 2rem; color: #28a745;"></i>
+            <h5 class="card-title mt-3">Upload Leaf Image</h5>
+            <p class="card-text">Capture and upload a photo of a plant leaf showing symptoms to begin detection.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Detection -->
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <i class="bi bi-cpu" style="font-size: 2rem; color: #28a745;"></i>
+            <h5 class="card-title mt-3">AI-Powered Detection</h5>
+            <p class="card-text">Our deep learning model analyzes the image to identify the exact crop disease.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prevention Tips -->
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <i class="bi bi-shield-check" style="font-size: 2rem; color: #28a745;"></i>
+            <h5 class="card-title mt-3">Prevention Tips</h5>
+            <p class="card-text">Get simple and effective prevention tips to protect your crops and reduce loss.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weather Info -->
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <i class="bi bi-cloud-sun" style="font-size: 2rem; color: #28a745;"></i>
+            <h5 class="card-title mt-3">Weather Forecast</h5>
+            <p class="card-text">Check live weather updates and 5-day forecasts to plan your farming activities smartly.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blogs -->
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <i class="bi bi-journal-text" style="font-size: 2rem; color: #28a745;"></i>
+            <h5 class="card-title mt-3">Educational Blog</h5>
+            <p class="card-text">Explore blogs on seasonal farming tips, disease management, and crop care techniques.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Help -->
+      <div class="col-md-4 mb-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body">
+            <i class="bi bi-chat-dots" style="font-size: 2rem; color: #28a745;"></i>
+            <h5 class="card-title mt-3">Ask for Help</h5>
+            <p class="card-text">Have questions? Contact our team anytime through the support form for guidance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{% url 'detect_disease' %}" class="btn btn-success btn-lg">🌿 Start Detection</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- Why Choose SmartCropCare Section -->
+<section class="py-5 bg-white" id="why-smartcropcare">
+  <div class="container">
+    <div class="row text-center mb-4">
+      <div class="col-lg-8 offset-lg-2">
+        <h2 class="fw-bold text-success">🌟 Why Choose <span class="text-primary">SmartCropCare</span>?</h2>
+        <p class="lead text-muted">
+          We combine the power of AI with practical farming experience to give you a reliable, easy-to-use, and impactful platform.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Feature 1 -->
+      <div class="col-md-4">
+        <div class="border rounded p-4 shadow-sm h-100 text-center">
+          <i class="bi bi-lightning-charge" style="font-size: 2rem; color: #28a745;"></i>
+          <h5 class="mt-3 fw-semibold">Fast & Accurate Detection</h5>
+          <p>Get instant results powered by AI trained on thousands of real plant images.</p>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="col-md-4">
+        <div class="border rounded p-4 shadow-sm h-100 text-center">
+          <i class="bi bi-phone" style="font-size: 2rem; color: #28a745;"></i>
+          <h5 class="mt-3 fw-semibold">Mobile-Friendly</h5>
+          <p>Access the platform on any device—even with slow internet—anytime, anywhere.</p>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="col-md-4">
+        <div class="border rounded p-4 shadow-sm h-100 text-center">
+          <i class="bi bi-globe" style="font-size: 2rem; color: #28a745;"></i>
+          <h5 class="mt-3 fw-semibold">Rural-Focused Design</h5>
+          <p>Created with the needs of local farmers in mind—simple, useful, and multilingual-ready.</p>
+        </div>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="col-md-4">
+        <div class="border rounded p-4 shadow-sm h-100 text-center">
+          <i class="bi bi-bar-chart-line" style="font-size: 2rem; color: #28a745;"></i>
+          <h5 class="mt-3 fw-semibold">Real-Time Insights</h5>
+          <p>Live weather forecasts and recent blog posts keep you updated with smart farming tips.</p>
+        </div>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="col-md-4">
+        <div class="border rounded p-4 shadow-sm h-100 text-center">
+          <i class="bi bi-tools" style="font-size: 2rem; color: #28a745;"></i>
+          <h5 class="mt-3 fw-semibold">Practical Prevention Tips</h5>
+          <p>We don’t just identify diseases—we show you how to treat and prevent them.</p>
+        </div>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="col-md-4">
+        <div class="border rounded p-4 shadow-sm h-100 text-center">
+          <i class="bi bi-check2-circle" style="font-size: 2rem; color: #28a745;"></i>
+          <h5 class="mt-3 fw-semibold">Trusted & Tested</h5>
+          <p>Fully tested for accuracy, speed, and ease-of-use. Built for real-life field use.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- About Section -->
+<section class="py-5 bg-light" id="about">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-success">🌿 About <span class="text-primary">SmartCropCare</span></h2>
+      <p class="text-muted lead">AI-Powered Crop Disease Detection & Prevention Platform</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- About Intro -->
+      <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-body">
+            <h5 class="fw-bold"><i class="bi bi-info-circle text-success"></i> What We Do</h5>
+            <p>We help farmers, gardeners, and researchers detect plant diseases early using AI. Just upload a leaf image—our trained model will do the rest, providing disease name, description, and prevention tips.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- How It Works -->
+      <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-body">
+            <h5 class="fw-bold"><i class="bi bi-gear text-success"></i> How It Works</h5>
+            <ul class="list-unstyled">
+              <li>Upload a clear image of the plant leaf</li>
+              <li>AI detects the disease using deep learning</li>
+              <li>View disease name, symptoms & tips</li>
+              <li>See reference images for visual help</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why It Matters -->
+      <div class="col-lg-12">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-body">
+            <h5 class="fw-bold"><i class="bi bi-heart-pulse text-success"></i> Why This Matters</h5>
+            <p class="mb-2">
+              Agriculture feeds the world. Our goal is to empower farmers to protect their crops, improve yields, and reduce harmful chemicals through early disease intervention.
+            </p>
+            <ul class="mb-0">
+              <li>✅ Farmers make timely decisions</li>
+              <li>✅ Gardeners protect plants easily</li>
+              <li>✅ Students explore AI in agriculture</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Community & Contact -->
+      <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-body">
+            <h5 class="fw-bold"><i class="bi bi-people text-success"></i> Community Engagement</h5>
+            <p>Our platform includes a blog system where users can post tips, remedies, and stories. Admins review submissions for quality. Comments and reactions are supported!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+          <div class="card-body">
+            <h5 class="fw-bold"><i class="bi bi-envelope text-success"></i> Contact Us</h5>
+            <p>Got feedback or questions? Visit our <a href="{% url 'contact' %}">Contact Page</a> to reach out. We'd love to hear from you!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5" id="faq">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-success">Frequently Asked Questions (FAQ)❓ </h2>
+      <p class="text-muted">Here are some common queries about our platform</p>
+    </div>
+
+    <div class="accordion" id="faqAccordion">
+      <!-- FAQ 1 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+            🌿 How do I upload a leaf image for disease detection?
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Go to the "Detect Disease" page and upload a clear image of the affected leaf. The AI will process and give instant results.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+            Can I contribute blogs or farming tips?
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Yes! Submit your blog about crop care or your farming experience. We review each one before it goes live on the site.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+            How quickly will I get a response?
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            We usually respond within 24–48 hours. For urgent issues, please mention “Urgent” in your message on the contact page.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help Button -->
+    <div class="text-center mt-5">
+      <p class="mb-2">Still need help?</p>
+      <a href="{% url 'contact' %}#contact-form" class="btn btn-outline-success btn-sm">
+        Contact Support
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- Weather JavaScript -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        fetch(`/get-weather/?lat=${lat}&lon=${lon}`, {
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("location").innerText = `📍 ${data.city}`;
+          document.getElementById("temperature").innerText = `🌡️ ${data.temp} °C`;
+          document.getElementById("description").innerText = `☁️ ${data.weather}`;
+
+          if (data.suggestions && data.suggestions.length > 0) {
+            const sug = document.getElementById("crop-suggestions");
+            sug.innerHTML = `<strong>⚠️ Crop Alert:</strong><ul style="margin-bottom: 0;">` +
+              data.suggestions.map(s => `<li>${s}</li>`).join('') +
+              `</ul>`;
+          }
+        })
+        .catch(() => {
+          document.getElementById("weather-box").style.display = 'none';
+        });
+
+      }, function (error) {
+        console.warn("Geolocation blocked or failed:", error.message);
+        document.getElementById("weather-box").style.display = 'none';
+      });
+    } else {
+      document.getElementById("weather-box").style.display = 'none';
+    }
+  });
+</script>
+
+
+{% include "footer.html" %}
+

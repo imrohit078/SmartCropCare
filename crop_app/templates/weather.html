@@ -1,0 +1,104 @@
+{% include "base.html" %}
+{% load static %}
+
+<div class="container mt-5 mb-5">
+  <h2 class="text-center mb-4">🌤️ Weather Forecast</h2>
+
+  {% if error %}
+    <div class="alert alert-warning text-center">{{ error }}</div>
+  {% endif %}
+
+  <form method="GET" action="{% url 'get_weather' %}" class="d-flex justify-content-center mb-4">
+    <input type="text" name="city" class="form-control me-2" placeholder="Enter a city (e.g., Mumbai)" style="max-width: 300px;" required>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  {% if weather %}
+  <div class="card shadow-sm mb-4">
+    <div class="card-body text-center">
+      <h4>{{ weather.city }}</h4>
+      <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather Icon" />
+      <p class="mb-1"><strong>🌡️ Temperature:</strong> {{ weather.temp }} °C</p>
+      <p class="mb-1"><strong>🌬️ Wind:</strong> {{ weather.wind }} m/s</p>
+      <p class="mb-1"><strong>💧 Humidity:</strong> {{ weather.humidity }}%</p>
+      <p>
+        <strong>🌥️ Condition:</strong>
+        {% if "rain" in weather.weather|lower %}🌧️ {% endif %}
+        {{ weather.weather }}
+      </p>
+      
+    </div>
+  </div>
+
+   {% if alerts %}
+  <div class="alert alert-danger">
+    <h5>⚠️ Crop Alerts:</h5>
+    <ul class="mb-0">
+      {% for alert in alerts %}
+        {% if forloop.first or alert not in alerts|slice:":forloop.counter0" %}
+          <li>{{ alert }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+
+<h4 class="mt-5 mb-3 text-center text-primary">🌤️ 5-Day Weather Forecast</h4>
+
+<div class="row mt-3">
+  {% for day in forecast %}
+    {% with weekday=day.date|date:"l" %}
+    <div class="col-md-2 col-sm-4 col-6 mb-4">
+      <div class="card text-center h-100 shadow-sm 
+        {% if weekday == 'Saturday' or weekday == 'Sunday' %}border-danger{% endif %}">
+        <div class="card-body">
+          <h6 class="{% if weekday == 'Saturday' or weekday == 'Sunday' %}text-danger{% else %}text-muted{% endif %}">
+            {{ weekday }}
+          </h6>
+          <small class="d-block mb-2">{{ day.date }}</small>
+          <img src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" alt="icon" />
+          <p class="mb-1 fw-bold">{{ day.temp }} °C</p>
+          <small 
+            class="{% if 'rain' in day.description|lower %}text-primary
+                    {% elif 'clear' in day.description|lower %}text-warning
+                    {% elif 'cloud' in day.description|lower %}text-secondary
+                    {% elif 'snow' in day.description|lower %}text-info
+                    {% else %}text-dark{% endif %}">
+            {{ day.description }}
+          </small>
+          {% if day.alert %}
+            <div class="mt-2 text-danger small"><strong>⚠️ {{ day.alert }}</strong></div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endwith %}
+  {% endfor %}
+</div>
+
+
+{% endif %}
+
+  <div class="text-center mt-4">
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary">← Back to Home</a>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const hasQuery = window.location.search.includes("city=") || window.location.search.includes("lat=");
+    if (!hasQuery && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        window.location.href = `/get-weather/?lat=${lat}&lon=${lon}`;
+      }, function (error) {
+        console.warn("Geolocation denied:", error.message);
+      });
+    }
+  });
+</script>
+
+{% include "footer.html" %}
+

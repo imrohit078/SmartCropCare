@@ -1,0 +1,71 @@
+{% include "base.html" %}
+
+<style>
+  body {
+    background: url('/static/images/detect.jpg') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .blur-box {
+    max-width: 600px;
+    padding: 2rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn-success {
+    font-weight: bold;
+  }
+
+  h2, h4, h5 {
+    text-align: center;
+  }
+</style>
+
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="container blur-box">
+
+    <h2 class="mb-4">🌿 Upload Plant Leaf Image</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-success w-100">Detect Disease</button>
+    </form>
+
+    {% if predicted_label %}
+      <div class="mt-4">
+        <h4 class="text-light fw-bold">Prediction: {{ predicted_label }}</h4>
+
+        <h5 class="mt-3">Precautionary Measures:</h5>
+        <ul class="ms-3">
+          {% for step in disease_info %}
+            <li>{{ step }}</li>
+          {% endfor %}
+        </ul>
+
+        <h5 class="mt-3">Uploaded Image:</h5>
+        <img src="{{ uploaded_image_url }}" alt="Uploaded leaf image" class="img-fluid border p-2 rounded" style="max-width: 100%;">
+
+        {% if confidence %}
+          <p class="mt-2 text-center"><strong>Confidence:</strong> {{ confidence }}%</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if form.errors %}
+      <div class="alert alert-danger mt-3">
+        {{ form.errors }}
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% include "footer.html" %}
+
+
